@@ -4,7 +4,7 @@
 </template>
 
 <script setup>
-import { isMobileTerminal } from '@/utils/flexible';
+import { isMobileTerminal } from '@/utils/flexible.js';
 import mobileNavigationVue from './mobile/index.vue';
 import pcNavigationVue from './pc/index.vue';
 
