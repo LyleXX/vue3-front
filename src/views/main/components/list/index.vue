@@ -20,10 +20,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { getPexelsList } from '@/api/pexels';
+import { ref, watch } from 'vue';
+import { getPexelsList } from '@/api/pexels.js';
 import itemVue from './item.vue';
 import { isMobileTerminal } from '@/utils/flexible.js';
+import { useStore } from 'vuex';
 
 /**
  * 构建数据请求
@@ -56,4 +57,41 @@ const getPexelsData = async () => {
   isLoading.value = false;
 };
 getPexelsData();
+const store = useStore();
+/**
+ * 通过此方法修改 query 请求参数，重新发起请求
+ */
+const resetQuery = (newQuery) => {
+  query = { ...query, ...newQuery };
+  // 重置状态
+  isFinished.value = false;
+  pexelsList.value = [];
+};
+
+/**
+ * 监听 currentCategory 的变化
+ */
+watch(
+  () => store.getters.currentCategory,
+  (currentCategory) => {
+    // 重置请求参数
+    resetQuery({
+      page: 1,
+      categoryId: currentCategory.id
+    });
+  }
+);
+/**
+ * 监听搜索内容项的变化
+ */
+watch(
+  () => store.getters.searchText,
+  (val) => {
+    // 重置请求参数
+    resetQuery({
+      page: 1,
+      searchText: val
+    });
+  }
+);
 </script>

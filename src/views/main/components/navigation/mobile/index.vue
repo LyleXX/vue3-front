@@ -25,9 +25,9 @@
         class="shrink-0 px-1.5 py-0.5 z-10 duration-200 last:mr-4"
         :ref="setItemRef"
         :class="{
-          'text-zinc-100': index === currentCategoryIndex
+          'text-zinc-100': index === $store.getters.currentCategoryIndex
         }"
-        @click="changeCurrentCategoryIndex(index)"
+        @click="onItemClick(item)"
       >
         {{ item.name }}
       </li>
@@ -42,18 +42,16 @@
 import menuVue from '@/views/main/components/menu/index.vue';
 import { onBeforeUpdate, ref, watch } from 'vue';
 import { useScroll } from '@vueuse/core';
+import { useStore } from 'vuex';
 
 const ulTarget = ref(null);
 const sliderStyle = ref({
   width: '52px',
   transform: 'translateX(0px)'
 });
+const store = useStore();
 
-const currentCategoryIndex = ref(0);
 const { x: ulScrollLeft } = useScroll(ulTarget);
-const changeCurrentCategoryIndex = (index) => {
-  currentCategoryIndex.value = index;
-};
 
 let itemRefs = [];
 const setItemRef = (el) => {
@@ -64,19 +62,21 @@ const setItemRef = (el) => {
 onBeforeUpdate(() => {
   itemRefs = [];
 });
-watch(currentCategoryIndex, (val) => {
-  const { left, width } = itemRefs[val].getBoundingClientRect();
-  sliderStyle.value = {
-    width: `${width}px`,
-    transform: `translateX(${ulScrollLeft.value + left - 10}px)`
-  };
-});
+watch(
+  () => store.getters.currentCategoryIndex,
+  (val) => {
+    const { left, width } = itemRefs[val].getBoundingClientRect();
+    sliderStyle.value = {
+      width: `${width}px`,
+      transform: `translateX(${ulScrollLeft.value + left - 10}px)`
+    };
+  }
+);
 
 const isOpenPopup = ref(false);
-
 // item 点击事件
-const onItemClick = (index) => {
-  currentCategoryIndex.value = index;
+const onItemClick = (item) => {
+  store.commit('app/changeCurrentCategory', item);
   isOpenPopup.value = false;
 };
 </script>

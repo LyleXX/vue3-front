@@ -13,7 +13,6 @@ export default {
       // 拼接组件注册的 name
       const arr = key.split('/');
       const directiveName = arr[arr.length - 1].replace('.js', '');
-      console.log(directiveName, value);
       // 完成注册
       app.directive(directiveName, value);
     }
