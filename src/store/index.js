@@ -4,6 +4,7 @@ import category from '@/store/modules/category.js';
 import theme from '@/store/modules/theme.js';
 import app from '@/store/modules/app.js';
 import search from '@/store/modules/search.js';
+import user from '@/store/modules/user.js';
 import createPersistedState from 'vuex-persistedstate';
 const store = createStore({
   getters,
@@ -11,7 +12,8 @@ const store = createStore({
     category,
     theme,
     app,
-    search
+    search,
+    user
   },
   plugins: [
     createPersistedState({
