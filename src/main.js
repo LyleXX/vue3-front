@@ -6,7 +6,7 @@ import store from './store';
 import directives from '@/directives/index.js';
 import { useRem } from '@/utils/flexible.js';
 import useTheme from '@/utils/theme.js';
-
+import './permission.js';
 import 'virtual:svg-icons-register';
 import mLibs from './libs';
 
