@@ -3,7 +3,12 @@
     class="fixed left-0 top-0 w-screen h-screen z-20 backdrop-blur-4xl bg-transparent pb-2 overflow-y-auto xl:p-2"
   >
     <!-- 移动端下展示 navbar -->
-    <m-navbar v-if="isMobileTerminal" @clickLeft="onPop" @clickRight="onPop">
+    <m-navbar
+      v-if="isMobileTerminal"
+      @clickLeft="onPop"
+      sticky
+      @clickRight="onPop"
+    >
       {{ pexelData.title }}
       <template #right>
         <m-svg-icon
