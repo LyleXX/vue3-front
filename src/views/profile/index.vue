@@ -23,6 +23,7 @@
           <!-- 头像部分 -->
           <div
             class="relative w-[80px] h-[80px] group xl:cursor-pointer xl:left-[50%] xl:translate-x-[-50%]"
+            @click="onAvatarClick"
           >
             <img
               v-lazy
@@ -32,7 +33,6 @@
             />
             <div
               class="absolute top-0 rounded-[50%] w-full h-full bg-[rgba(0,0,0,.4)] hidden xl:group-hover:block"
-              @click="onAvatarClick"
             >
               <m-svg-icon
                 name="change-header-image"
@@ -183,6 +183,7 @@ const onAvatarClick = () => {
  */
 const onNavbarLeftClick = () => {
   router.back();
+  store.commit('app/changeRouterType', 'back');
 };
 
 /**

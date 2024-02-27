@@ -66,7 +66,7 @@
             <a
               class="inline-block p-1 text-zinc-400 text-right dark:text-zinc-600 hover:text-zinc-600 dark:hover:text-zinc-400 text-sm duration-400 cursor-pointer"
               target="__black"
-              @click="router.push('/login')"
+              @click="goLogin"
             >
               去登录
             </a>
@@ -93,6 +93,12 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'register'
+};
+</script>
 
 <script setup>
 import headerVue from '../components/header.vue';
@@ -149,5 +155,10 @@ const onRegister = async () => {
     loading.value = false;
   }
   router.push('/');
+  store.commit('app/changeRouterType', 'push');
+};
+const goLogin = () => {
+  router.push('/login');
+  store.commit('app/changeRouterType', 'push');
 };
 </script>

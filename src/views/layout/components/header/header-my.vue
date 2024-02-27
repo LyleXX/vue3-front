@@ -77,12 +77,13 @@ const menuArr = [
   }
 ];
 const router = useRouter();
+const store = useStore();
 // 进入登录
 const onToLogin = () => {
   router.push('/login');
+  store.commit('app/changeRouterType', 'push');
 };
 
-const store = useStore();
 /**
  * menu Item 点击事件，也可以根据其他的 key 作为判定，比如 name
  */
@@ -90,6 +91,7 @@ const onItemClick = (path) => {
   // 有路径则进行路径跳转
   if (path) {
     router.push(path);
+    store.commit('app/changeRouterType', 'push');
     return;
   }
   // 无路径则为退出登录

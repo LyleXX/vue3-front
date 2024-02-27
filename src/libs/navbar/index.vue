@@ -34,6 +34,7 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 
 const props = defineProps({
   clickLeft: {
@@ -47,6 +48,7 @@ const props = defineProps({
   }
 });
 const router = useRouter();
+const store = useStore();
 /**
  * 左侧按钮点击事件
  */
@@ -56,6 +58,7 @@ const onClickLeft = () => {
     return;
   }
   router.back();
+  store.commit('app/changeRouterType', 'back');
 };
 
 /**

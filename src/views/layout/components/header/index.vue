@@ -20,9 +20,12 @@ import headerSearchVue from './header-search/index.vue';
 import headerThemeVue from './header-theme.vue';
 import headerMyVue from './header-my.vue';
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 
 const router = useRouter();
+const store = useStore();
 const onToHome = () => {
   router.push('/');
+  store.commit('app/changeRouterType', 'push');
 };
 </script>
